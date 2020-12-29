@@ -6,6 +6,6 @@ from django.urls import path, include
 from .views import hello_api, select_quiz
 
 urlpatterns = [
-    path("home/", hello_api),
+    path("home/<str:search_text>/<int:indexs>/", hello_api),
     path("<int:page_num>/", select_quiz)
 ]

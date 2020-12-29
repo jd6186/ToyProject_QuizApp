@@ -13,11 +13,10 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {/* <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }}/> */}
-          <Stack.Screen name="Home">
+          <Stack.Screen name="Home" component={HomeScreen} options={{ title: '이상형 월드컵' }}/>
+          {/* <Stack.Screen name="Home">
             {props => <HomeScreen {...props} extraData={'HomeScreen'} />}
-          </Stack.Screen>
-          {/* Stack.Screen의 속성값 중 component는 class가 아니고 function이다. */}
+          </Stack.Screen> */}
           <Stack.Screen name="Quiz" component={QuizScreen}  options={{ title: 'QuizScreen' }}/>
           <Stack.Screen name="Answer" component={AnswerScreen}  options={{ title: 'AnswerScreen' }}/>
           <Stack.Screen 

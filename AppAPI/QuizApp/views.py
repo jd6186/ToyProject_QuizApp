@@ -14,22 +14,22 @@ from bs4 import BeautifulSoup
 import requests 
 
 @api_view(['GET'])
-def hello_api(request):
+def hello_api(request, search_text, indexs):
     
     # 크롤링을 이용한 방법
     URL = 'https://www.piku.co.kr/w/get_list.php'
 
     # TODO
     # 화면에서 page_num 보내주기
-    page_num = 0
     formData = {
         'l': '',
-        's': page_num,
-        'n': 'bj',
+        's': indexs,
+        'n': search_text,
         'st': 'hot',
         'dt': '7777',
         'tp': 'all'
     }
+
     response = requests.post(URL, data=formData) 
     html = response.text
     stock_html = BeautifulSoup(html, "html.parser")
@@ -43,8 +43,8 @@ def hello_api(request):
     image_list = []
     for image in images:
         image_str = str(image).split("url('")
-        first_image = image_str[1].split(");")[0]
-        second_image = image_str[2].split(");")[0]
+        first_image = image_str[1].split("');")[0]
+        second_image = image_str[2].split("');")[0]
         name_list = image.text.strip().split('\n')
         image_list.append(first_image)
         image_list.append(second_image)
@@ -65,6 +65,7 @@ def hello_api(request):
         quiz_list.append(quiz_dic)
     
     serializer = QuizAppSerialize(quiz_list, many=True)
+    print(serializer.data)
     return Response(serializer.data)
 
 @api_view(['GET'])
